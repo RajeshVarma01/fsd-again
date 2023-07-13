@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { postStudentController } from "../Controllers/studentController.js";
 
 const route = Router()
 
@@ -8,10 +9,6 @@ route.get('/student', (req, res) => {
         email:"rajesh@1223"
     })
 })
-route.post('/student', (req, res) => {
-    res.json({
-        message: "Success"
-    })
-})    
+route.post('/student', postStudentController)
 
 export default route
