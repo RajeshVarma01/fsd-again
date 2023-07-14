@@ -1,4 +1,5 @@
 import userModel from "../models/userModel.js"
+import bcrypt from "bcryptjs"
 export const getStudentController = async (req, res) => {
    let students;
    try{
@@ -28,10 +29,14 @@ export const postStudentController = async (req, res) => {
         message:"USER ALREADY EXISTS"
     })
    }
+
+   const hashedPassword = bcrypt.hashSync(password);
+//    console.log(hashedPassword)
+
    const newStudent = new userModel({
     name: name,
     email: email,
-    password: password,
+    password: hashedPassword,
     batch: batch
    })
    try{
