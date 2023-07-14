@@ -1,11 +1,16 @@
-import Express from "express";
+import express from "express";
 import route from "./Routes/studentRoutes.js";
 import dotenv from 'dotenv'
 import connect from "./Database/conn.js";
+import cors from 'cors'
 
-const app = Express()
+const app = express()
 
-dotenv.config() 
+dotenv.config()
+
+app.use(cors())
+
+app.use(express.json())
 
 app.use("/api", route)
 
