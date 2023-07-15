@@ -49,3 +49,27 @@ export const postStudentController = async (req, res) => {
    })
 }
 
+export const deleteStudentController = async(req, res) => {
+   const email = req.params.email
+   console.log("inside delete..", email)
+   let studentEmail
+   try{
+    studentEmail = await userModel.findOne({email})
+    console.log("syudent id..", studentEmail)
+   }catch(e){
+    console.log(e)
+   }
+   if(!studentEmail){
+    res.status(400).json({
+        message: "NO USER FOUND"
+    })
+   }
+   try{
+    await userModel.deleteOne({email})
+   }catch(e){
+    console.log(e)
+   }
+   res.status(200).json({
+    message: "STUDENT SUCCESSFULLY DELETED"
+   })     
+}
